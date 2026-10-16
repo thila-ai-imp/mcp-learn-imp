@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "testcase-knowledge-java": {
+      "type": "stdio",
+      "command": "java",
+      "args": [
+        "-jar",
+        "${workspaceFolder}/target/testcase-knowledge-java-1.0.0.jar"
+      ],
+      "env": {
+        "TESTCASE_INPUT_DIR": "${workspaceFolder}/input",
+        "KNOWLEDGE_OUTPUT_DIR": "${workspaceFolder}/output"
+      }
+    }
+  }
+}
