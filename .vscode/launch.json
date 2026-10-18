@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run KnowledgeAgent",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["${workspaceFolder}", "--extensionDevelopmentPath=${workspaceFolder}"],
+      "outFiles": ["${workspaceFolder}/dist/extension.js"],
+      "preLaunchTask": "build KnowledgeAgent"
+    }
+  ]
+}

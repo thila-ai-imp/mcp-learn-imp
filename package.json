@@ -1,0 +1,49 @@
+{
+  "name": "knowledgeagent",
+  "displayName": "KnowledgeAgent",
+  "publisher": "knowledgeagent",
+  "version": "0.1.0",
+  "description": "VS Code plugin that runs custom agents on the GenAI model already signed in to GitHub Copilot.",
+  "private": true,
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": ["*"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "knowledgeagent.open",
+        "title": "KnowledgeAgent: Open",
+        "category": "KnowledgeAgent"
+      }
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build:web": "esbuild src/web/app.ts --bundle --outfile=public/app.js --target=es2020 --minify",
+    "build:webview": "esbuild src/extension/webviewClient.ts --bundle --outfile=dist/webview.js --target=es2020 --format=iife",
+    "build:extension": "esbuild src/extension/extension.ts --bundle --platform=node --target=node18 --outfile=dist/extension.js --external:vscode --format=cjs",
+    "build:vscode": "npm run build:webview && npm run build:extension",
+    "build:server": "esbuild src/server/index.ts --bundle --platform=node --target=node18 --outfile=dist/server.js --packages=external",
+    "build": "npm run typecheck && npm run build:webview && npm run build:extension && npm run build:web && npm run build:server",
+    "start": "node dist/server.js",
+    "sample": "node scripts/make-sample.mjs"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^5.0.0",
+    "multer": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.140.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  }
+}
